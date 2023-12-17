@@ -27,9 +27,7 @@ namespace SmartHomeClientv2
         public Form1()
         {
             InitializeComponent();
-            //URL = ConfigurationManager.AppSettings["SmartHomeURL"];
-            URL = "http://localhost/smarthome2v/";
-
+            URL = ConfigurationManager.AppSettings["SmartHomeURL"];
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -59,6 +57,11 @@ namespace SmartHomeClientv2
                         // Handle the response here if login is successful
                         string responseBody = await response.Content.ReadAsStringAsync();
                         // Deserialize responseBody if needed and perform actions
+                        MessageBox.Show("Login sussessful.");
+                        this.Hide();
+                        Form2 form2 = new Form2(username, password);
+                        form2.FormClosed += (s, args) => this.Close(); // Ensure the application closes when Form2 is closed
+                        form2.Show();
                     }
                     else
                     {
